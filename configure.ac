@@ -1,12 +1,12 @@
-AC_PREREQ(2.69)
-AC_INIT([xxd], [1.7], [jnweiger@informatik.uni-erlangen.de, fancer.lancer@gmail.com])
+AC_PREREQ([2.71])
+AC_INIT([xxd],[1.7],[jnweiger@informatik.uni-erlangen.de, fancer.lancer@gmail.com])
 
 # Select UNIX system to build xxd
 CFLAGS="$CFLAGS -DUNIX"
 
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AC_CONFIG_SRCDIR([src/])
-AC_CONFIG_HEADER([src/config.h])
+AC_CONFIG_HEADERS([src/config.h])
 
 AC_PROG_CC
 
@@ -27,7 +27,15 @@ AC_DEFINE_UNQUOTED([RII_TIMESTAMP], "$username @ $hostname on $timestamp",
                    [Timestamp when ./configure was executed])
 
 # Checks for header files.
-AC_HEADER_STDC
+m4_warn([obsolete],
+[The preprocessor macro `STDC_HEADERS' is obsolete.
+  Except in unusual embedded environments, you can safely include all
+  ISO C90 headers unconditionally.])dnl
+# Autoupdate added the next two lines to ensure that your configure
+# script's behavior did not change.  They are probably safe to remove.
+AC_CHECK_INCLUDES_DEFAULT
+AC_PROG_EGREP
+
 AC_CHECK_HEADERS([stdio.h fcntl.h unistd.h stdlib.h string.h ctype.h], [], [AC_MSG_FAILURE([Missing some header files.])])
 
 # Checks for library functions.
